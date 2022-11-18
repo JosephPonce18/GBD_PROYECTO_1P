@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte_cantidadPesca_por_barco" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9d548b01-2b02-44ff-b110-1e32aa6108b1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     pesca."cod_barco" AS pesca_cod_pesca,
+     count (pesca."cod_barco") AS pesca_cod_barco
+FROM
+     pesca
+group by
+pesca.cod_barco
+order by pesca_cod_barco asc]]>
+	</queryString>
+	<field name="pesca_cod_pesca" class="java.lang.String"/>
+	<field name="pesca_cod_barco" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="12" width="607" height="53" uuid="3d3e60c2-375d-4c05-8dc7-19466e70ac86"/>
+				<textElement>
+					<font fontName="Times New Roman" size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte del registro de pesca por barco]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="55" y="13" width="729" height="67" uuid="b8d2926d-d178-4c2d-84b9-1003d227f0bf"/>
+				<textElement>
+					<font fontName="Times New Roman" size="24" isBold="false"/>
+				</textElement>
+				<text><![CDATA[A continuación se muestre el reporte generado el cual indica la cantidad de barcos que han registrado alguna pesca, todo esto en valores de unidades]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="222" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="126" y="0" width="557" height="222" uuid="fb58c8a5-67e0-441c-aa34-23c3b159d079"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{pesca_cod_pesca}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{pesca_cod_pesca}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{pesca_cod_barco}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="13" y="82" width="100" height="49" uuid="7a34d556-895d-41e2-be25-fb8e0a3050f2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Cantidad de pescas registradas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="561" y="202" width="100" height="20" uuid="0712a227-91ba-4d63-916d-d4d6f0bbbf26"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Barco]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
